@@ -1,0 +1,15 @@
+generator:
+  userCount: 8
+  groupCount: 5
+  messagePerUser: 20
+redis:
+  host: "redis"
+  port: 6378
+  db: "0"
+rabbit:
+  uri: 'amqp://root:default@rabbit'
+limitations:
+  userIntervalMs: 7000
+  groupIntervalMs: 3000
+  userLimit: 3
+  groupLimit: 5

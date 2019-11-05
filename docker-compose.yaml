@@ -1,0 +1,32 @@
+version: "3.7"
+
+x-placement:
+  &default-placement
+  constraints:
+    - node.role == worker
+  preferences:
+    - spread: node.role == worker
+
+services:
+  redis:
+    image: redis:3.2-alpine
+    networks:
+      - nodenet
+    ports:
+      - 6378:6379
+  rabbit:
+    image: rabbitmq:3-management
+    container_name: proxyapp_rabbit_1
+    environment:
+      - RABBITMQ_DEFAULT_USER=root
+      - RABBITMQ_DEFAULT_PASS=default
+    ports:
+      - 15672:15672
+      - 5672:5672
+    networks:
+      - nodenet
+networks:
+  mongonet:
+    driver: bridge
+  nodenet:
+    driver: bridge
